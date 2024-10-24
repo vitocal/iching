@@ -2,8 +2,6 @@ import toNumber from "lodash/toNumber";
 import isEmpty from "lodash/isEmpty";
 
 import { Component } from "preact";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import classNames from "classnames";
 
 import { getHexagram } from "../../constants/IchingLookup";
@@ -13,21 +11,16 @@ import {
   splitIntoParagraphs
 } from "../../constants/utils";
 
-import { setDetailsHexagram } from "../../actions/details";
 import HexagramInfoCard from "../../components/HexagramInfoCard";
 
 class DetailPage extends Component {
   render() {
-    let hex = this.props.hexagram;
-    const emptyShell = hex.number === 0;
+    let hex_number = toNumber(this.props.match.params.number);
+    let hex = getHexagram(hex_number);
 
     let tarot_image = getAsset(`img/tarot/Tao_${hex.number}.jpg`);
     return (
-      <div
-        className={classNames("detailspage-container", {
-          "empty-shell": false
-        })}
-      >
+      <div className={classNames("detailspage-container")}>
         <HexagramInfoCard hexagram={hex} display_trigrams />
 
         <div className="interpretation">
@@ -112,28 +105,4 @@ DetailPage.defaultProps = {
   }
 };
 
-export default withRouter(props => {
-  // select appropriate hexagram
-  let { match } = props;
-  let hexNumber = toNumber(match.params.number);
-
-  // Render early, if data is not loaded
-
-  // But when data arrives late, rerender
-  let store = window.store;
-  const unsubscribe = store.subscribe(() => {
-    let { book_loaded } = store.getState();
-    if (book_loaded) {
-      // order is important, to avoid infinite loop
-      unsubscribe();
-      store.dispatch(setDetailsHexagram(hexNumber));
-    }
-  });
-
-  // Connect to redux, now its a fulfiled with data (integrated)
-  let DetailContainer = connect(state => ({
-    hexagram: getHexagram(hexNumber) || DetailPage.defaultProps.hexagram
-  }))(DetailPage);
-
-  return <DetailContainer {...props} />;
-});
+export default DetailPage;

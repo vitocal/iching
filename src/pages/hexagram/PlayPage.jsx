@@ -3,8 +3,6 @@ import isEmpty from "lodash/isEmpty";
 import { Component } from "preact";
 import { connect } from "react-redux";
 
-import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-
 import { withRouter } from "react-router";
 
 import { getHexagram } from "../../constants/IchingLookup";
@@ -148,17 +146,15 @@ PlayPage.defaultProps = {
   animation_timeout: 30
 };
 
-export default withRouter(
-  connect(
-    state => ({
-      hexagram: getHexagram(state.play_hexagram),
-      preferences: state.preferences
-    }),
-    dispatch => ({
-      generateHexagram: () => dispatch(actions.generateHexagram()),
-      clearHexagram: () => {
-        dispatch(actions.clearHexagram());
-      }
-    })
-  )(PlayPage)
-);
+export default connect(
+  state => ({
+    hexagram: getHexagram(state.play_hexagram),
+    preferences: state.preferences
+  }),
+  dispatch => ({
+    generateHexagram: () => dispatch(actions.generateHexagram()),
+    clearHexagram: () => {
+      dispatch(actions.clearHexagram());
+    }
+  })
+)(PlayPage);

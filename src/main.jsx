@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 import enquire from "enquire.js";
 
 import DefaultSettings from "./constants/settings";
-import { getAsset, parseQS } from "./constants/utils";
+import { parseQS } from "./constants/utils";
 
 import { AppContainer } from "./pages";
 import reducers from "./reducers";
@@ -46,12 +46,7 @@ import("typeface-cormorant-garamond");
  * Configure global store
  */
 function configureStore(initialState) {
-  // window.__REDUX_DEVTOOLS_EXTENSION__ = true;
-  let fCreateStore = compose(
-    applyMiddleware(thunk)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    // window.devToolsExtension ? window.devToolsExtension() : f => f
-  )(createStore);
+  let fCreateStore = compose(applyMiddleware(thunk))(createStore);
 
   const store = fCreateStore(reducers, initialState);
 

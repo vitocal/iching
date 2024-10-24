@@ -5,7 +5,6 @@ import { withRouter } from "react-router";
 
 class AboutPage extends Component {
   render() {
-    console.log("About Page render");
     return (
       <div className="aboutpage-container">
         <h1>About Page</h1>
@@ -14,4 +13,4 @@ class AboutPage extends Component {
   }
 }
 
-export default withRouter(connect(state => ({}))(AboutPage));
+export default connect(state => ({}))(AboutPage);

@@ -1,5 +1,4 @@
 import { Component } from "preact";
-import classNames from "classnames";
 
 import { connect } from "react-redux";
 
@@ -42,4 +41,4 @@ AppContainer.defaultProps = {
   isMobile: true
 };
 
-export default connect(null)(AppContainer);
+export default AppContainer;

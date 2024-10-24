@@ -21,6 +21,7 @@
   "mainInput": "main",
   "mainOutput": "main",
   "dependencies": {
+    "@preact/preset-vite": "^2.9.1",
     "@vitejs/plugin-react": "^1.0.4",
     "async": "^1.5.1",
     "autoprefixer": "^7.1.2",
@@ -98,8 +99,8 @@
     "scroll-behavior": "^0.9.3",
     "style-loader": "~0.13.0",
     "svg-url-loader": "^2.1.1",
-    "typeface-eb-garamond": "0.0.54",
     "typeface-cormorant-garamond": "0.0.54",
+    "typeface-eb-garamond": "0.0.54",
     "url-loader": "~0.5.7",
     "vite": "^2.6.7",
     "webpack": "^3.10.0",
