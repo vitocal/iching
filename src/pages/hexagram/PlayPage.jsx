@@ -25,10 +25,7 @@ class PlayPage extends Component {
       this.props.clearHexagram();
       this.textarea.value = "";
     }
-  }
-
-  setFocus() {
-    if (this.textarea) this.textarea.focus();
+    this.setFocus();
   }
 
   render() {
@@ -49,6 +46,7 @@ class PlayPage extends Component {
                 className="text"
                 inputMode="text"
                 spellCheck="false"
+                autoFocus
               />
             </div>
           </div>
@@ -71,6 +69,10 @@ class PlayPage extends Component {
         </form>
       </div>
     );
+  }
+
+  setFocus() {
+    if (this.textarea) this.textarea.focus();
   }
 
   /** @deprecated */
@@ -110,6 +112,8 @@ class PlayPage extends Component {
         au.play();
       }
     }
+
+    this.throwDices();
   };
 
   /**
@@ -126,8 +130,6 @@ class PlayPage extends Component {
     setTimeout(() => {
       //window.store.dispatch(HexagramActions.clearHexagram());
       this.props.generateHexagram().then(c => {
-        console.log("after", c);
-        console.log("hexagram", this.props.hexagram);
         this.setState({ already_played: true });
         this.goToHexagram();
       });
@@ -143,7 +145,7 @@ class PlayPage extends Component {
 
 PlayPage.defaultProps = {
   hexagram: {},
-  animation_timeout: 300
+  animation_timeout: 30
 };
 
 export default withRouter(

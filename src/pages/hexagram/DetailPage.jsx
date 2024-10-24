@@ -7,7 +7,11 @@ import { withRouter } from "react-router";
 import classNames from "classnames";
 
 import { getHexagram } from "../../constants/IchingLookup";
-import { getAsset, hyphenate } from "../../constants/utils";
+import {
+  getAsset,
+  hyphenate,
+  splitIntoParagraphs
+} from "../../constants/utils";
 
 import { setDetailsHexagram } from "../../actions/details";
 import HexagramInfoCard from "../../components/HexagramInfoCard";
@@ -17,20 +21,11 @@ class DetailPage extends Component {
     let hex = this.props.hexagram;
     const emptyShell = hex.number === 0;
 
-    /* Lines
-    let lines = hex.interpretation.lines.map((line, i) => (
-      <div className="line" key={this.lineId(line.poem)}>
-        <q className="subQuote">{this.formatQuote(line.poem)}</q>
-        {this.formatText(line.expl)}
-      </div>
-    ))
-    */
-
     let tarot_image = getAsset(`img/tarot/Tao_${hex.number}.jpg`);
     return (
       <div
         className={classNames("detailspage-container", {
-          "empty-shell": emptyShell
+          "empty-shell": false
         })}
       >
         <HexagramInfoCard hexagram={hex} display_trigrams />
@@ -40,31 +35,20 @@ class DetailPage extends Component {
             <div className="tarot">
               <img src={tarot_image} alt={hex.description} />
             </div>
-            <div className="oracle">
-              <q>{this.formatQuote(hex.interpretation.oracle)}</q>
-            </div>
           </div>
           {this.formatText(hex.interpretation.resume)}
 
           <h3>The Image</h3>
-          <hr />
           <q className="subQuote">
             {this.formatQuote(hex.interpretation.image.oracle)}
           </q>
           {this.formatText(hex.interpretation.image.image)}
 
           <h3>The Judgement</h3>
-          <hr />
           <q className="subQuote">
             {this.formatQuote(hex.interpretation.oracle)}
           </q>
           {this.formatText(hex.interpretation.judgment)}
-          <hr />
-          {/**
-          <h3>The Lines</h3>
-          <hr />
-          {lines}
-          */}
         </div>
       </div>
     );
@@ -76,7 +60,11 @@ class DetailPage extends Component {
 
   /* Format text paragraphs between <p> */
   formatText(text) {
-    let paragraphs = text.split("\n\n");
+    let paragraphs = text
+      .split("\n\n")
+      .map(p => p.replace(/\n/g, "").trim())
+      .map(p => splitIntoParagraphs(p, 100))
+      .flat(Infinity);
     let txtHyphenated = paragraphs.map(hyphenate);
     let fmted = txtHyphenated.map(p => <p>{p}</p>);
     return fmted;

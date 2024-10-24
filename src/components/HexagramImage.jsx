@@ -1,15 +1,24 @@
-import { Component } from 'preact';
+import { Component } from "preact";
 
-import isString from 'lodash/isString';
+import isString from "lodash/isString";
 
-import { getTrigramByName } from '../constants/IchingLookup';
+import { getTrigramByName } from "../constants/IchingLookup";
 
 // Single Line
 function YinLine() {
-  return <div className="yin"><span /></div>;
+  return (
+    <div className="yin">
+      <span />
+    </div>
+  );
 }
 function YangLine() {
-  return <div className="yang"><span /><span /></div>;
+  return (
+    <div className="yang">
+      <span />
+      <span />
+    </div>
+  );
 }
 
 /*
@@ -18,39 +27,38 @@ function YangLine() {
  * Or `below` and `above`, as it trigram name
  */
 export class HexagramImage extends Component {
-    render() {
+  render() {
+    let { below, above } = this.props;
 
-      let { below, above } = this.props;
-
-      if ( isString(below.title) ||
-           isString(above.title) ) {
-        below = getTrigramByName( below.title );
-        above = getTrigramByName( above.title );
-      }
-
-      let above_image = (above ? this.trigramImage( above ).reverse() : '')
-      let below_image = (below ? this.trigramImage( below ).reverse() : '')
-
-      return (
-        <div className="hex-img">
-          { above_image }
-          { below_image }
-        </div>
-      );
+    if (isString(below.title) || isString(above.title)) {
+      below = getTrigramByName(below.title);
+      above = getTrigramByName(above.title);
     }
 
-    // Generate a single trigram
-    trigramImage( trigram ) {
-      let image = trigram.trigrams.map( this.kuaTag );
-      return image;
-    }
+    let above_image = above ? this.trigramImage(above).reverse() : "";
+    let below_image = below ? this.trigramImage(below).reverse() : "";
 
-    // Generate a single Yin or Yang line
-    kuaTag( kua , i) {
-      let lines = ( kua ? <YangLine /> : <YinLine /> );
+    return (
+      <div className="hex-img">
+        {above_image}
+        <div className="spacer" />
+        {below_image}
+      </div>
+    );
+  }
 
-      return lines;
-    }
+  // Generate a single trigram
+  trigramImage(trigram) {
+    let image = trigram.trigrams.map(this.kuaTag);
+    return image;
+  }
+
+  // Generate a single Yin or Yang line
+  kuaTag(kua, i) {
+    let lines = kua ? <YangLine /> : <YinLine />;
+
+    return lines;
+  }
 }
 
 /*
@@ -59,14 +67,12 @@ export class HexagramImage extends Component {
 export class TrigramImage extends HexagramImage {
   render() {
     let { tri } = this.props;
-    if ( isString(tri.name) ) {
-      tri = getTrigramByName( tri.name );
+    if (isString(tri.name)) {
+      tri = getTrigramByName(tri.name);
     }
 
-    let tri_image = this.trigramImage( tri ).reverse();
+    let tri_image = this.trigramImage(tri).reverse();
 
-    return (
-      <div className="tri-img">{ tri_image }</div>
-    )
+    return <div className="tri-img">{tri_image}</div>;
   }
 }

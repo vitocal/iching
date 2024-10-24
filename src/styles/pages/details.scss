@@ -1,14 +1,17 @@
 .detailspage-container {
+  overflow: overlay;
+  height: inherit;
 
   & .hexagram-card {
     width: 100%;
     position: absolute;
     top: 0; left: 0;
+    z-index: 10;
   }
 
   & .interpretation {
     margin: 5% 5%;
-    margin-top: calc( 120px + 5%);
+    margin-top: calc( 120px);
 
     & q {
       position: relative;
@@ -17,14 +20,13 @@
       padding-left: 1rem;
       padding-right: 1rem;
       max-width: 100%;
-      display: block;
+      display: inline-block;
       quotes: "\201C" "\201D";
-
-      white-space: pre-wrap;
-      font-style: italic;
 
       word-wrap: break-word;
       word-break: break-word;
+      text-wrap: balance;
+      line-height: 1.2;
       hyphens: manual;
     }
 
@@ -43,14 +45,16 @@
 
 
     & .highlight {
+
       display: flex;
       flex-direction: column-reverse;
       justify-content: space-around;
       align-items: center;
 
       & .tarot {
+        margin-top: 2em;
+
         flex: 1 1 40%;
-        width: 196px;
         transform: scale3d(1, 1, 1.0);
 
         & img {
@@ -59,18 +63,19 @@
           border: 1px solid rgba(255,255,255,.1);
 
           border-radius: 4px;
-          box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.05), 0 10px 20px rgba(0,0,0,.05);  
+          box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.05), 0 10px 20px rgba(0,0,0,.05);
         }
       }
 
       & .oracle {
         width: 100%;
-        margin: 0px auto;
+        margin: 1em auto;
       }
     }
 
     & p {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
+      line-height: 1.2em;
       hyphens: manual;
     }
 
@@ -92,9 +97,14 @@
 
     & h3 {
       font-size: 2.0em;
-      font-weight: 800;
+      font-weight: 300;
       text-transform: uppercase;
       margin-bottom: 0;
+      margin: 1em 0;
+      font-family: "Open Sans";
+
+      border-bottom: 2px solid var(--fg_color);
+      padding-bottom: 0.2em;
     }
   }
 }

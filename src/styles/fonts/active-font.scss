@@ -1,19 +1,16 @@
 /**
  * Font loading
  */
-/*body { font-family: 'Open Sans', helvetica, sans-serif; }*/
-body { font-family: 'EB Garamond', helvetica, serif; }
-.cursive {font-family: serif; }
+body { font-family: 'Cormorant Garamond', helvetica, serif; }
 
 .mainfont-loaded {
   body {
-    /*font-family: 'Open Sans', helvetica, sans-serif;*/
-    font-family: 'Roboto';
+    font-family: 'Open Sans';
   }
 }
 blockquote , q {
-  font-family: 'Cormorant', serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 .cursive {
-  font-family: 'Cormorant', serif;
+  font-family: 'Cormorant Garamond', serif;
 }

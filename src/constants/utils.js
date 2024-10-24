@@ -59,6 +59,8 @@ export function hyphenate(text) {
 
 /* Clean phrase of widowed words.
  * (avoid single word at last line.)
+ *
+ * TODO: this function is buggy and returns out-of-order text.
  */
 export function noWidows(phrase) {
   let words = phrase.trim().split(" ");
@@ -75,4 +77,33 @@ export function noWidows(phrase) {
   }
 
   return words.join(" ");
+}
+
+export function splitIntoParagraphs(text, maxWords = 150) {
+  // Split the text by sentences
+  const sentences = text.match(/[^.!?]*[.!?]/g) || [];
+  const paragraphs = [];
+  let paragraph = [];
+  let wordCount = 0;
+
+  sentences.forEach(sentence => {
+    const wordsInSentence = sentence.split(/\s+/).length;
+
+    // If adding this sentence exceeds the maxWords, push the current paragraph
+    if (wordCount + wordsInSentence > maxWords) {
+      paragraphs.push(paragraph.join(" "));
+      paragraph = []; // Start a new paragraph
+      wordCount = 0;
+    }
+
+    paragraph.push(sentence); // Add the sentence to the current paragraph
+    wordCount += wordsInSentence;
+  });
+
+  // Add the last paragraph if it's not empty
+  if (paragraph.length > 0) {
+    paragraphs.push(paragraph.join(" "));
+  }
+
+  return paragraphs;
 }

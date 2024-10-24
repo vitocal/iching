@@ -23,7 +23,7 @@ import "./styles/main.scss";
 // fileName: which file error occurs in
 // lineNumber: what line error occurs on
 
-import("typeface-eb-garamond");
+import("typeface-cormorant-garamond");
 
 /**
  * Register (external) service worker
