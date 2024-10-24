@@ -7,7 +7,7 @@ import { withRouter } from "react-router";
 import classNames from "classnames";
 
 import { getHexagram } from "../../constants/IchingLookup";
-import { getAsset, hyphenate, noWidows } from "../../constants/utils";
+import { getAsset, hyphenate } from "../../constants/utils";
 
 import { setDetailsHexagram } from "../../actions/details";
 import HexagramInfoCard from "../../components/HexagramInfoCard";
@@ -87,7 +87,6 @@ class DetailPage extends Component {
     let quote = text.replace(/\t/g, "");
     return hyphenate(quote)
       .split("\n")
-      .map(noWidows)
       .join("\n");
   }
 }
