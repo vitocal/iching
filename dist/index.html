@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/png" href="img/iching.png" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>I Ching - The book of Changes</title>
+    <meta name="description" content="I Ching - The book of changes" />
+    <meta name="author" content="bbfc" />
+    <meta name="copyright" content="Open Source - MIT" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ebecc9" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <!-- Social graph -->
+    <meta property="og:title" content="I Ching" />
+    <meta property="og:description" content="The book of changes" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/vicalejuri/iching/master/extra/masthead-filled.png"
+    />
+    <meta property="og:url" content="https://iching.netlify.com" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="I Ching" />
+    <meta name="twitter:description" content="The book of changes" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/vicalejuri/iching/master/extra/masthead-filled.png"
+    />
+
+    <style>
+      * {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+      ::-moz-selection {
+        background: rgba(0, 0, 0, .9);
+        color: #fff;
+      }
+      ::selection {
+        background: rgba(0, 0, 0, .9);
+        color: #fff;
+      }
+      body {
+        font-family: Colfax, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+          sans-serif;
+
+        font-weight: 100;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #ebecc9), color-stop(70%, #e9d0a0));
+        background: linear-gradient(180deg, #ebecc9 30%, #e9d0a0 70%);
+        color: #000;
+
+        -webkit-box-sizing: border-box;
+
+                box-sizing: border-box;
+        font-size: 1em;
+        font-weight: normal;
+        margin: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100svh;
+
+        text-rendering: optimizeLegibility;
+
+        /* Kerning */
+        -webkit-font-feature-settings: "kern";
+        font-feature-settings: "kern";
+        -webkit-font-kerning: normal;
+                font-kerning: normal;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+
+        /* Ligatures */
+        -webkit-font-variant-ligatures: common-ligatures;
+        font-variant-ligatures: common-ligatures;
+
+        /* Discretionary ligatures */
+        -ms-font-feature-settings: "dlig";
+        -webkit-font-feature-settings: "dlig";
+        font-feature-settings: "dlig";
+
+        /* Zero with slash */
+        -webkit-font-feature-settings: "zero", "kern", "liga", "clig", "zero";
+                font-feature-settings: "zero", "kern", "liga", "clig", "zero";
+        font-variant: slashed-zero;
+      }
+      a {
+        color: #ff4081;
+      }
+      a:active,
+      a:focus,
+      button:active,
+      button:focus {
+        outline: 0;
+        border: none;
+        outline-style: none;
+      }
+      #copyleft {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        padding: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+      /**
+        * Container
+        **/
+      /* Wrapper */
+      .app-wrap {
+        height: 100svh;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        background: #fff;
+
+        position: relative;
+        overflow: hidden;
+      }
+      @media (min-width: 768px) {
+        .app-wrap {
+          width: 428px;
+          max-width: 428px;
+          min-height: 578px;
+          height: 860px;
+          margin: 5svh auto 5svh auto;
+
+          -webkit-box-sizing: content-box;
+
+                  box-sizing: content-box;
+
+          border: 10px solid rgba(0, 0, 0, .9);
+          border-radius: 10px;
+          -webkit-box-shadow: 1px 2px 2px hsl(var(--shadow-color) / 0.2),
+            2px 4px 4px hsl(var(--shadow-color) / 0.2),
+            4px 8px 8px hsl(var(--shadow-color) / 0.2),
+            8px 16px 16px hsl(var(--shadow-color) / 0.2),
+            16px 32px 32px hsl(var(--shadow-color) / 0.2);
+                  box-shadow: 1px 2px 2px hsl(var(--shadow-color) / 0.2),
+            2px 4px 4px hsl(var(--shadow-color) / 0.2),
+            4px 8px 8px hsl(var(--shadow-color) / 0.2),
+            8px 16px 16px hsl(var(--shadow-color) / 0.2),
+            16px 32px 32px hsl(var(--shadow-color) / 0.2);
+        }
+      }
+      /*
+       * Overall Layout
+       */
+      .app-wrap > * {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+      }
+      /*
+       * Content
+       */
+      .content {
+        position: absolute;
+        overflow-x: hidden;
+        /* Trick: https://css-tricks.com/snippets/css/momentum-scrolling-on-ios-overflow-elements/ */
+        overflow-y: overlay;
+        -webkit-overflow-scrolling: touch;
+
+        width: 100%;
+        height: 100%;
+        padding: 0px 0px;
+        background: #fff;
+      }
+    </style>
+    
+    <script type="module" crossorigin src="/assets/index.bf83d816.js"></script>
+    <link rel="stylesheet" href="/assets/index.5cd7b820.css">
+  </head>
+
+  <body>
+    <div id="app-mount">
+      <div class="app-wrap">
+        <noscript style="padding: 0.5em">
+          <h1>❌ Javascript required</h1>
+          <p>
+            Please enable javascript and reload the page.
+          </p>
+        </noscript>
+      </div>
+    </div>
+
+    <div id="copyleft">
+      <a href="https://github.com/vitocal" target="_blank" rel="noopener"
+        >@vitocal</a
+      >
+    </div>
+
+    
+  </body>
+</html>
