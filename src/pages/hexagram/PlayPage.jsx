@@ -23,7 +23,6 @@ class PlayPage extends Component {
       this.props.clearHexagram();
       this.textarea.value = "";
     }
-    this.setFocus();
   }
 
   render() {
