@@ -3,17 +3,17 @@
   "name": "I Ching",
   "icons": [
     {
-      "src": "assets/icons/yin_yang_filled.48.png",
+      "src": "/icons/yin_yang_filled.48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "assets/icons/yin_yang_filled.192.png",
+      "src": "/icons/yin_yang_filled.192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "assets/icons/yin_yang_filled.512.png",
+      "src": "/icons/yin_yang_filled.512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
